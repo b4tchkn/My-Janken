@@ -28,9 +28,20 @@ class ViewController: UIViewController {
     
     @IBAction func shuffleAction(_ sender: Any) {
         
-        //0, 1, 2の数値をランダムに算出
-        //arc4random_uniform()の戻り値はUInt32だからSwiftの標準的な整数型Intにキャストする
-        answerNumber = Int(arc4random_uniform(3))
+        //新しいじゃんけんの結果を一時的に格納する変数を設ける
+        var newAnswerNumber = 0
+        
+        repeat {
+            
+            //0, 1, 2の数値をランダムに算出
+            //arc4random_uniform()の戻り値はUInt32だからIntにキャスト
+            newAnswerNumber = Int(arc4random_uniform(3))
+            
+            //前回と同じ結果の時は再度ランダムに数値を出す
+            //異なる結果の時はrepeatを抜ける
+        } while answerNumber == newAnswerNumber
+        
+        answerNumber = newAnswerNumber
         
         if answerNumber == 0 {
         //グー
